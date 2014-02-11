@@ -1,3 +1,1 @@
-from CommonUtilities import primes
-
-print list(primes(30))
+print max([x * y for x in range(100,999) for y in range(100,999) if str(x*y) == str(x*y)[::-1]])
