@@ -1,0 +1,1 @@
+print(reduce(lambda x,y: x + y, map(int, list(str(2**1000)))))
