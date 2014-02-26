@@ -4,7 +4,7 @@ from BinarySearchTree import bTree
 class TestBinarySearchTree(unittest.TestCase):
     
     def setUp(self):
-        self.tree = bTree(8)
+        self.tree = bTree.fromValue(8)
         
     def test_initialization(self):
         self.assertNotEqual(self.tree, None)
@@ -12,14 +12,17 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(self.tree.root.key, 8)
         
     def setUpTree1(self):
-        self.tree.insert(3)
-        self.tree.insert(1)
-        self.tree.insert(6)
-        self.tree.insert(4)
-        self.tree.insert(7)
-        self.tree.insert(10)
-        self.tree.insert(14)
-        self.tree.insert(13)
+        """
+        sets up the following tree after the inital setUp function:
+                         8
+                    /         \
+                   3            10
+                /     \          \
+               1       6         14
+                      /  \       /
+                    4     7    13
+        """
+        self.tree.insertValues([3, 1, 6, 4, 7, 10, 14, 13])
         
     def test_insert(self):
         self.tree.insert(3)
@@ -39,5 +42,28 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(self.tree.root.right.right.key, 13)
         self.tree.insert(15)
         self.assertEqual(self.tree.root.right.right.right.key, 15)
+        
+    def test_findMin(self):
+        self.setUpTree1()
+        self.assertEqual(self.tree.findMinLeaf(self.tree.root).key, 1)
+        self.assertEqual(self.tree.findMinLeaf(self.tree.root.left.right).key, 4)
+        self.assertEqual(self.tree.findMinLeaf(self.tree.root.right).key, 10)
+        self.assertEqual(self.tree.findMinLeaf(self.tree.root.right.right).key, 13)
+        
+    def test_remove(self):
+        self.setUpTree1()
+        self.tree.remove(10)
+        self.assertEqual(self.tree.root.right.key, 14)
+        self.tree.remove(3)
+        self.assertEqual(self.tree.root.left.key, 4)
+        self.assertEqual(self.tree.root.left.right.left, None)
+        self.tree.remove(8)
+        self.assertEqual(self.tree.root.key, 13)
+        
+    def test_removeAndAddRoot(self):
+        self.tree.remove(8)
+        self.assertEqual(self.tree.root, None)
+        self.tree.insert(7)
+        self.assertEqual(self.tree.root.key, 7)
         
 unittest.main()
