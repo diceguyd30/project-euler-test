@@ -15,12 +15,13 @@ class TestBinarySearchTree(unittest.TestCase):
         """
         sets up the following tree after the inital setUp function:
                          8
+                      /     \
                     /         \
                    3            10
-                /     \          \
-               1       6         14
-                      /  \       /
-                    4     7    13
+                 /   \           \
+                1     6          14
+                     / \        /
+                    4   7     13
         """
         self.tree.insertValues([3, 1, 6, 4, 7, 10, 14, 13])
         
@@ -42,6 +43,14 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(self.tree.root.right.right.key, 13)
         self.tree.insert(15)
         self.assertEqual(self.tree.root.right.right.right.key, 15)
+        
+    def test_Duplicates(self):
+        self.tree.insert(8)
+        self.assertEqual(self.tree.root.key, 8)
+        self.assertEqual(self.tree.root.right.key, 8)
+        self.tree.remove(8)
+        self.assertEqual(self.tree.root.key, 8)
+        self.assertEqual(self.tree.root.right, None)
         
     def test_findMin(self):
         self.setUpTree1()
@@ -65,5 +74,9 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(self.tree.root, None)
         self.tree.insert(7)
         self.assertEqual(self.tree.root.key, 7)
+        
+    def test_sortedValues(self):
+        self.setUpTree1()
+        self.assertEqual(list(self.tree.getSortedValues()), list([1, 3, 4, 6, 7, 8, 10, 13, 14]))
         
 unittest.main()

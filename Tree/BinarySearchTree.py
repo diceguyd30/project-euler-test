@@ -71,12 +71,31 @@ class bTree:
                         self.root = None
                     
     def _replaceNodeInParent(self, parent, node):
-        if parent.key > node.key:
-            parent.left = node
+        if parent:
+            if parent.key > node.key:
+                parent.left = node
+            else:
+                parent.right = node
         else:
-            parent.right = node
+            self.root = node
             
     def findMinLeaf(self, n):
         if n.left:
             return self.findMinLeaf(n.left)
         return n
+        
+    def getSortedValues(self):
+        return self._getSortedValuesHelper(self.root)
+            
+    def _getSortedValuesHelper(self, n):
+        if n:
+            if n.left:
+                for x in self._getSortedValuesHelper(n.left):
+                    yield x
+            yield n.key
+            if n.right:
+                for x in self._getSortedValuesHelper(n.right):
+                    yield x
+                
+        
+        
