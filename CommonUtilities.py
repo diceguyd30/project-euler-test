@@ -37,3 +37,12 @@ def findMaxPath(fileName):
         for x in range(0,len(lines[y]) - 1):
             lines[y-1][x] += max(lines[y][x], lines[y][x+1])
     return lines[0][0]
+    
+def findFactors(n):
+    s = set()
+    for x in range(1, int(sqrt(n)) + 1):
+        if n % x == 0:
+            s.add(x)
+            if x != 1:
+                s.add(n / x)
+    return list(s)
