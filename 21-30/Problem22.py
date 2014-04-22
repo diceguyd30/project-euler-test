@@ -1,4 +1,4 @@
-lines = sorted(open("problem22.txt").read().replace('"', '').split(","))
+lines = sorted(open("21-30/problem22.txt").read().replace('"', '').split(","))
 sums = map(lambda x: sum(map(lambda y: ord(y) - 64, x)), lines)
 
 result = 0

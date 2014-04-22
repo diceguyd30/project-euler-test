@@ -79,4 +79,5 @@ class TestBinarySearchTree(unittest.TestCase):
         self.setUpTree1()
         self.assertEqual(list(self.tree.getSortedValues()), list([1, 3, 4, 6, 7, 8, 10, 13, 14]))
         
-unittest.main()
+suite = unittest.TestLoader().loadTestsFromTestCase(TestBinarySearchTree)
+unittest.TextTestRunner(verbosity=2).run(suite)
