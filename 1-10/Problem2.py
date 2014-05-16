@@ -1,4 +1,3 @@
-print("Problem 2")
 def fibs(targetValue):
     a, b = 0, 1
     while (a < targetValue):
